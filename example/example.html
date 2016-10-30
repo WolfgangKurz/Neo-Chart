@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="padding-12" style="position:relative;z-index:99">
-		<canvas class="line-chart" width="1" height="360" style="border:1px solid #d7d7df" data-target="chart-datas" data-min="0" data-max="100" data-title="Percentage Line & Bar Mixed Graph" data-style="line,bar" data-y-postfix="%" data-bars="2" data-bar-min="0" data-bar-max="200" data-bar-y-postfix=""></canvas>
+		<canvas class="line-chart" width="1" height="360" style="border:1px solid #d7d7df" data-target="chart-datas" data-min="0" data-max="100" data-title="Percentage Line & Bar Mixed Graph" data-style="line,bar" data-y-postfix="%" data-bars="2" data-bar-min="0" data-bar-max="200" data-bar-y-postfix=" 회"></canvas>
 	</div>
 	<div class="chart-datas">
 		<input type="hidden" class="chart-data-title" value="Percentage (%)">
@@ -22,8 +22,8 @@
 		<input type="hidden" class="chart-data-bar-dataname0" value="Succeeded,Failed">
 	</div>
 </body>
-<script type="text/javascript" src="https://raw.githubusercontent.com/WolfgangKurz/Neo-Chart/master/src/neo-chart.min.js"></script>
+<script type="text/javascript" src="../src/neo-chart.js"></script>
 <script type="text/javascript" >
-neoChart( $(".line-chart") );
+neoChart( document.querySelector(".line-chart") );
 </script>
 </html>

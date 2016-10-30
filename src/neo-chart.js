@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.0
+ * Version: 1.0.1
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -19,7 +19,7 @@
 
 		var opt = $("."+canvas.attr("data-target"));
 		var properties = {
-			index: 1,
+			index: -1,
 			baseX: 0,
 			cellWidth: 0
 		};
@@ -217,9 +217,7 @@
 					}
 					if(baseX2>0){
 						var y = yBarAxis(options["bar-max"] - parseInt((options["bar-max"]-options["bar-min"]) * i / 10));
-						textSize = ctx.measureText(y);
-						w = textSize.width;
-						ctx.fillText(y, width - baseX2 + 8 + 8, 8 + (height - 8 - baseY) * i / 11 + 18);
+						ctx.fillText(y, width - 8, 8 + (height - 8 - baseY) * i / 11 + 18);
 					}
 				}
 			ctx.closePath();
@@ -454,14 +452,14 @@
 											ctx.fillText(options["bar-names"][i][k], x+8, 72+popY);
 
 											ctx.fillStyle = options["bar-colors"][i][k];
-											ctx.fillText(yAxis(dataset[v][k]), popX + x + 8, 72 + popY);
+											ctx.fillText(yBarAxis(dataset[v][k]), popX + x + 8, 72 + popY);
 											popY += 16;
 										}
 									}else{
 										ctx.fillStyle = "#383838";
 										ctx.fillText(options["bar-names"][v], x+8, 72+popY);
 
-										ctx.fillText(yAxis(dataset[v]), popX + x + 8, 72 + popY);
+										ctx.fillText(yBarAxis(dataset[v]), popX + x + 8, 72 + popY);
 										popY += 16;
 									}
 								}
