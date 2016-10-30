@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.2
+ * Version: 1.0.3
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -26,7 +26,6 @@
 		var options = {
 			title: canvas.attr("data-title") ? canvas.attr("data-title") : "",
 			background: canvas.attr("data-background") ? canvas.attr("data-background") : "#FFFFFF",
-			titles: opt.find(".chart-data-title").value.split(","),
 			labels: opt.find(".chart-data-label").value.split(","),
 			style: canvas.attr("data-style") ? canvas.attr("data-style").split(",") : ["line"],
 			"x-prefix": canvas.attr("data-x-prefix") ? canvas.attr("data-x-prefix") : "",
@@ -100,9 +99,9 @@
 			var barWidth = 0;
 			var textSize, w, h;
 
-			var xAxis = function(v){ return options["x-prefix"] + v + options["x-postfix"] };
-			var yAxis = function(v){ return options["y-prefix"] + v + options["y-postfix"] };
-			var yBarAxis = function(v){ return options["bar-y-prefix"] + v + options["bar-y-postfix"] };
+			var xAxis = function(v){ return options["x-prefix"] + (isNaN(v) ? "-" : v) + options["x-postfix"] };
+			var yAxis = function(v){ return options["y-prefix"] + (isNaN(v) ? "-" : v) + options["y-postfix"] };
+			var yBarAxis = function(v){ return options["bar-y-prefix"] + (isNaN(v) ? "-" : v) + options["bar-y-postfix"] };
 
 			ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset translates
 
