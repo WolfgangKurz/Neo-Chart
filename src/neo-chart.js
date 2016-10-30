@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.1
+ * Version: 1.0.2
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -44,7 +44,7 @@
 		options["bar-max"] = canvas.attr("data-bar-max") ? parseInt(canvas.attr("data-bar-max")) : options.max;
 
 		for(var k=0; k<options.style.length; k++){
-			var datasets = [], colorset = [], nameset = [];
+			var datasets = [], nameset = [];
 			for(var i=0; ; i++){
 				var dataset = opt.find(".chart-data-" + options.style[k] + "-dataset"+i);
 				if( dataset==null ) break;
@@ -63,15 +63,14 @@
 				}
 				datasets.push(datas);
 
-				var colors = opt.find(".chart-data-" + options.style[k] + "-color").value.split(",");
-				colorset.push(colors);
-
 				var names = opt.find(".chart-data-" + options.style[k] + "-dataname"+i).value.split(",");
 				nameset.push(names);
 			}
+			var colors = opt.find(".chart-data-" + options.style[k] + "-color").value.split(",");
+
 			options[options.style[k] + "-dataset"] = datasets;
 			options[options.style[k] + "-names"] = nameset;
-			options[options.style[k] + "-colors"] = colorset;
+			options[options.style[k] + "-colors"] = colors;
 		}
 
 		var styleAlign = ["bar","line"];
@@ -300,10 +299,10 @@
 								ctx.fillStyle = options["line-colors"][i];
 								ctx.save();
 									textSize = ctx.measureText( yAxis(dataset[j]) );
-									ctx.shadowColor = "rgba(0, 0, 0, 0.31)";
+									ctx.shadowColor = "rgba(0, 0, 0, 0.17)";
 									ctx.shadowOffsetX = 0; 
 									ctx.shadowOffsetY = 0; 
-									ctx.shadowBlur = 6;
+									ctx.shadowBlur = 7;
 
 									maxW = Math.max(textSize.width, maxW);
 									ctx.fillText(yAxis(dataset[j]), x - parseInt(textSize.width/2), (height-8-baseY-8) -y +12+8);
