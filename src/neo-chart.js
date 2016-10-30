@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.4
+ * Version: 1.0.5
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -99,7 +99,7 @@
 			var barWidth = 0;
 			var textSize, w, h;
 
-			var xAxis = function(v){ return options["x-prefix"] + (isNaN(v) ? "-" : v) + options["x-postfix"] };
+			var xAxis = function(v){ return options["x-prefix"] + v + options["x-postfix"] };
 			var yAxis = function(v){ return options["y-prefix"] + (isNaN(v) ? "-" : v) + options["y-postfix"] };
 			var yBarAxis = function(v){ return options["bar-y-prefix"] + (isNaN(v) ? "-" : v) + options["bar-y-postfix"] };
 
