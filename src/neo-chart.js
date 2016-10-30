@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.5
+ * Version: 1.0.6
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -43,7 +43,7 @@
 		options["bar-max"] = canvas.attr("data-bar-max") ? parseInt(canvas.attr("data-bar-max")) : options.max;
 
 		for(var k=0; k<options.style.length; k++){
-			var datasets = [], nameset = [];
+			var datasets = [], nameset = [], colorset = [];
 			for(var i=0; ; i++){
 				var dataset = opt.find(".chart-data-" + options.style[k] + "-dataset"+i);
 				if( dataset==null ) break;
@@ -62,14 +62,16 @@
 				}
 				datasets.push(datas);
 
+				var colors = opt.find(".chart-data-" + options.style[k] + "-color"+i).value.split(",");
+				colorset.push(colors);
+
 				var names = opt.find(".chart-data-" + options.style[k] + "-dataname"+i).value.split(",");
 				nameset.push(names);
 			}
-			var colors = opt.find(".chart-data-" + options.style[k] + "-color").value.split(",");
 
 			options[options.style[k] + "-dataset"] = datasets;
 			options[options.style[k] + "-names"] = nameset;
-			options[options.style[k] + "-colors"] = colors;
+			options[options.style[k] + "-colors"] = colorset;
 		}
 
 		var styleAlign = ["bar","line"];
@@ -321,7 +323,7 @@
 
 								if(typeof dataset[j]=="object"){
 									for(var k=0; k<Math.min(dataset[j].length,options.bars); k++){
-										ctx.fillStyle = options["bar-colors"][k];
+										ctx.fillStyle = options["bar-colors"][i][k];
 										var y = (height - baseY - 38) * dataset[j][k] / barRange;
 
 										ctx.fillRect(
@@ -339,7 +341,7 @@
 										maxW = Math.max(textSize.width, maxW);
 									}
 								}else{
-									ctx.fillStyle = options["bar-colors"][0];
+									ctx.fillStyle = options["bar-colors"][j][0];
 
 									var y = (height - baseY - 38) * dataset[j] / barRange;
 									ctx.fillRect(x - barWidth/2*options.bars, (height - 8 - baseY - 8) - y, barWidth, y);
@@ -402,7 +404,7 @@
 				}
 			}
 			popX += 8;
-			popWidth += popX + 28;
+			popWidth += popX + 32;
 
 			for(var v=0; v<options.labels.length; v++){
 				// current Index
@@ -459,6 +461,7 @@
 										ctx.fillStyle = "#383838";
 										ctx.fillText(options["bar-names"][v], x+8, 72+popY);
 
+										ctx.fillStyle = options["bar-colors"][v][0];
 										ctx.fillText(yBarAxis(dataset[v]), popX + x + 8, 72 + popY);
 										popY += 16;
 									}
