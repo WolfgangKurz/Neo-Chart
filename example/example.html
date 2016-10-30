@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Neo-Chart Example</title>
+<style type="text/css">
+.padding-12 { padding: 12px }
+</style>
+</head>
+<body>
+	<div class="padding-12" style="position:relative;z-index:99">
+		<canvas class="line-chart" width="1" height="360" style="border:1px solid #d7d7df" data-target="chart-datas" data-min="0" data-max="100" data-title="Percentage Line & Bar Mixed Graph" data-style="line,bar" data-y-postfix="%" data-bars="2" data-bar-min="0" data-bar-max="200" data-bar-y-postfix=""></canvas>
+	</div>
+	<div class="chart-datas">
+		<input type="hidden" class="chart-data-title" value="Percentage (%)">
+		<input type="hidden" class="chart-data-label" value="★0,★1,★2,★3,★4,★5,★6,★7,★8,★9,★max">
+		<input type="hidden" class="chart-data-line-color" value="#45A9A5">
+		<input type="hidden" class="chart-data-line-dataset0" value="100,100,100,100,99.25,95.11,86.78,83.39,74.91,64.21,61.39">
+		<input type="hidden" class="chart-data-line-dataname0" value="Percentage">
+		<input type="hidden" class="chart-data-bar-color" value="#95CAFF,#F58995">
+		<input type="hidden" class="chart-data-bar-dataset0" value="100;50,100;50,100;50,100;50,99.25;50,95.11;50,86.78;50,83.39;50,74.91;50,64.21;50,61.39;50">
+		<input type="hidden" class="chart-data-bar-dataname0" value="Succeeded,Failed">
+	</div>
+</body>
+<script type="text/javascript" src="https://raw.githubusercontent.com/WolfgangKurz/Neo-Chart/master/src/neo-chart.min.js"></script>
+<script type="text/javascript" >
+neoChart( $(".line-chart") );
+</script>
+</html>
