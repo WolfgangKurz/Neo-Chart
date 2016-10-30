@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.3
+ * Version: 1.0.4
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -321,8 +321,8 @@
 
 								if(typeof dataset[j]=="object"){
 									for(var k=0; k<Math.min(dataset[j].length,options.bars); k++){
+										ctx.fillStyle = options["bar-colors"][k];
 										var y = (height - baseY - 38) * dataset[j][k] / barRange;
-										ctx.fillStyle = options["bar-colors"][i][k];
 
 										ctx.fillRect(
 											x - barWidth/2*options.bars + k * barWidth,
@@ -339,6 +339,8 @@
 										maxW = Math.max(textSize.width, maxW);
 									}
 								}else{
+									ctx.fillStyle = options["bar-colors"][0];
+
 									var y = (height - baseY - 38) * dataset[j] / barRange;
 									ctx.fillRect(x - barWidth/2*options.bars, (height - 8 - baseY - 8) - y, barWidth, y);
 									ctx.strokeRect(x - barWidth/2*options.bars, (height - 8 - baseY - 8) - y, barWidth, y);
