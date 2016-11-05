@@ -12,7 +12,7 @@ Just add next code to HEAD tag on your site.
 
 If you want to use with Github CDN, use this code.
 ``` html
-<script type="text/javascript" src="https://raw.githubusercontent.com/WolfgangKurz/Neo-Chart/master/src/neo-chart.min.js"></script>
+<script type="text/javascript" src="https://wolfgangkurz.github.io/neo-chart/neo-chart.min.js"></script>
 ```
 
 You don't need any CSS files to use this library.
