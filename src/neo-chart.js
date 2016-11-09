@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.7
+ * Version: 1.0.8
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -283,6 +283,18 @@
 								var x = 8 + baseOffset + 4 + 8 + parseInt(baseWidth * j / options.labels.length);
 								var y = (height - baseY - 38) * dataset[j] / range;
 
+								var tY = (height-8-baseY-8) - y - 8;
+								if(j>0){
+									var vy = (height - baseY - 38) * dataset[j-1] / range;
+									vy = (height-8-baseY-8) - vy - 8;
+									if( Math.abs(tY-vy)<14 ) tY -= 10;
+								}
+								if(j<dataset.length-1){
+									var vy = (height - baseY - 38) * dataset[j+1] / range;
+									vy = (height-8-baseY-8) - vy - 8;
+									if( Math.abs(tY-vy)<14 ) tY -= 10;
+								}
+
 								ctx.lineWidth = 1.78;
 								ctx.strokeStyle = options["line-colors"][i];
 								ctx.beginPath();
@@ -306,7 +318,7 @@
 									ctx.shadowBlur = 7;
 
 									maxW = Math.max(textSize.width, maxW);
-									ctx.fillText(yAxis(dataset[j]), x - parseInt(textSize.width/2), (height-8-baseY-8) -y +12+8);
+									ctx.fillText(yAxis(dataset[j]), x - parseInt(textSize.width/2), tY);
 								ctx.restore();
 							}
 						}
