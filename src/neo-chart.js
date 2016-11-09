@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.9
+ * Version: 1.0.10
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -362,7 +362,7 @@
 			maxW = parseInt(maxW);
 
 			////// Popup
-			var popWidth = 0, popHeight = 28, popY = 18;
+			var popWidth = 0, popHeight = 12, popY = 18;
 			var popX = 0;
 			for(var u=0; u<options.style.length; u++){
 				var dataset = options[options.style[u]+"-dataset"];
@@ -386,29 +386,40 @@
 						////// Values
 						for(var i=0; i<options["line-dataset"].length; i++){
 							var dataset = options["line-dataset"][i];
-							textSize = ctx.measureText(yAxis(dataset[v]));
-							popWidth = Math.max(parseInt(textSize.width), popWidth);
+							for(var v=0; v<dataset.length; v++){
+								if(typeof dataset[v]=="object"){
+									for(var k=0; k<dataset[v].length; k++){
+										textSize = ctx.measureText(yAxis(dataset[v][k]));
+										popWidth = Math.max(parseInt(textSize.width), popWidth);
+									}
+								}else{
+									textSize = ctx.measureText(yAxis(dataset[v]));
+									popWidth = Math.max(parseInt(textSize.width), popWidth);
+								}
+							}
 						}
 						break;
 					case "bar":
 						////// Values (Lines)
 						for(var i=0; i<options["bar-dataset"].length; i++){
 							var dataset = options["bar-dataset"][i];
-							if(typeof dataset[v]=="object"){
-								for(var k=0; k<Math.min(dataset[v].length,options.bars); k++){
-									textSize = ctx.measureText(yAxis(dataset[v][k]));
+							for(var v=0; v<dataset.length; v++){
+								if(typeof dataset[v]=="object"){
+									for(var k=0; k<Math.min(dataset[v].length,options.bars); k++){
+										textSize = ctx.measureText(yAxis(dataset[v][k]));
+										popWidth = Math.max(parseInt(textSize.width), popWidth);
+									}
+								}else{
+									textSize = ctx.measureText(yAxis(dataset[v]));
 									popWidth = Math.max(parseInt(textSize.width), popWidth);
 								}
-							}else{
-								textSize = ctx.measureText(yAxis(dataset[v]));
-								popWidth = Math.max(parseInt(textSize.width), popWidth);
 							}
 						}
 						break;
 				}
 			}
 			popX += 8;
-			popWidth += popX + 32;
+			popWidth += popX + 18;
 
 			for(var v=0; v<options.labels.length; v++){
 				// current Index
