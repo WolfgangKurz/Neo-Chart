@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.6
+ * Version: 1.0.7
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -37,7 +37,8 @@
 			min: canvas.attr("data-min") ? parseInt(canvas.attr("data-min")) : 0,
 			max: canvas.attr("data-min") ? parseInt(canvas.attr("data-max")) : 100,
 			bars: canvas.attr("data-bars") ? parseInt(canvas.attr("data-bars")) : 1,
-			type: canvas.attr("data-type")
+			splits: canvas.attr("data-split") ? parseInt(canvas.attr("data-split")) : parseInt(canvas.height/36),
+			type: canvas.attr("data-type"),
 		};
 		options["bar-min"] = canvas.attr("data-bar-min") ? parseInt(canvas.attr("data-bar-min")) : options.min;
 		options["bar-max"] = canvas.attr("data-bar-max") ? parseInt(canvas.attr("data-bar-max")) : options.max;
@@ -160,17 +161,16 @@
 				ctx.font = "bold 16px Arial";
 				textSize = ctx.measureText(options.title);
 				ctx.fillText(options.title, width/2 - textSize.width/2, 0);
-
-				ctx.font = "12px Arial";
-				ctx.fillStyle = "#8c8c8c";
-				ctx.strokeStyle = "#e8e8e8";
 			}
+			ctx.font = "12px Arial";
+			ctx.fillStyle = "#8c8c8c";
+			ctx.strokeStyle = "#e8e8e8";
 
 			////// Horizontal Labels
 			for(var i=0; i<options.labels.length; i++){
 				// current Index
 				if(properties.index==i){
-					ctx.fillStyle = "rgba(232,232,80,0.17)";
+					ctx.fillStyle = "rgba(212,212,212,0.17)";
 					var x = parseInt((baseWidth * i - baseWidth / 2) / options.labels.length);
 					ctx.fillRect(
 						8 + baseOffset + 4 + 8 + x, 8,
@@ -204,20 +204,20 @@
 
 			////// Vertical Values
 			ctx.beginPath();
-				for(var i=0; i<11; i++){
-					var y = yAxis(options.max - parseInt((options.max-options.min) * i / 10));
+				for(var i=0; i<(options.splits+1); i++){
+					var y = yAxis(options.max - parseInt((options.max-options.min) * i / options.splits));
 					textSize = ctx.measureText(y);
 					w = textSize.width;
-					ctx.fillText(y, 8 + baseX - w, 8 + (height - 8 - baseY) * i / 11 + 18);
+					ctx.fillText(y, 8 + baseX - w, 8 + (height - 8 - baseY) * i / (options.splits+1) + 18);
 
-					if(i<10){
-						y = parseInt((height - 8 - baseY) * i / 11);
+					if(i<options.splits){
+						y = parseInt((height - 8 - baseY) * i / (options.splits+1));
 						ctx.moveTo(8 + baseX + 4, 8 + y + 14);
 						ctx.lineTo(width - 12,  8 + y + 14);
 					}
 					if(baseX2>0){
-						var y = yBarAxis(options["bar-max"] - parseInt((options["bar-max"]-options["bar-min"]) * i / 10));
-						ctx.fillText(y, width - 8, 8 + (height - 8 - baseY) * i / 11 + 18);
+						var y = yBarAxis(options["bar-max"] - parseInt((options["bar-max"]-options["bar-min"]) * i / options.splits));
+						ctx.fillText(y, width - 8, 8 + (height - 8 - baseY) * i / (options.splits+1) + 18);
 					}
 				}
 			ctx.closePath();
