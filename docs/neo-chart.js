@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.11
+ * Version: 1.0.12
  *
  * Copyright 2016 Wolfgang Kurz
  * Released under the MIT license
@@ -362,7 +362,7 @@
 			maxW = parseInt(maxW);
 
 			////// Popup
-			var popWidth = 0, popHeight = 12, popY = 18;
+			var popWidth = 0, popHeight = 12 + 20, popY = 18;
 			var popX = 0;
 			for(var u=0; u<options.style.length; u++){
 				var dataset = options[options.style[u]+"-dataset"];
@@ -441,6 +441,11 @@
 						ctx.strokeRect(x, 72, popWidth, popHeight);
 					ctx.restore();
 					ctx.fillRect(x, 72, popWidth, popHeight);
+
+					ctx.fillStyle = "#383838";
+					textSize = ctx.measureText(options.labels[v]);
+					ctx.fillText(options.labels[v], x+parseInt(popWidth/2-textSize.width/2), 72+popY);
+					popY += 20;
 
 					for(var u=0; u<options.style.length; u++){
 						switch(options.style[u]){
