@@ -36,7 +36,7 @@ You don't need any CSS files to use this library.
 | data-min                | Minimum display Y value   | Integer                     | 0                |
 | data-max                | Maximum display Y value  | Integer                     | 100             |
 | data-bars                | Bar count                        | Integer                     | 1                |
-| data-splits               | Vertical split count           | Integer                      | Height / 36  |
+| data-split                | Vertical split count           | Integer                      | Height / 36  |
 | data-target              | Graph data class-name      | String                      | (empty)        |
 
 ### Example for starters
