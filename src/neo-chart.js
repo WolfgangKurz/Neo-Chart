@@ -180,7 +180,7 @@
 					var x = (parseInt(baseWidth * i - baseWidth / 2) / options.labels.length);
 					ctx.fillRect(
 						8 + baseOffset + 4 + 8 + x, 8,
-						baseWidth / options.labels.length - 2, // grid size
+						baseWidth / options.labels.length, // grid size
 						height - 8 - baseY - 8 - 8
 					);
 
