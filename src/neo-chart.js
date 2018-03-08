@@ -1,9 +1,9 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.12
+ * Version: 1.0.13
  *
- * Copyright 2016 Wolfgang Kurz
+ * Copyright 2016-2018 Wolfgang Kurz
  * Released under the MIT license
  * https://github.com/WolfgangKurz/Neo-Chart/blob/master/LICENSE
  */
@@ -26,6 +26,9 @@
 		var options = {
 			title: canvas.attr("data-title") ? canvas.attr("data-title") : "",
 			background: canvas.attr("data-background") ? canvas.attr("data-background") : "#FFFFFF",
+			gridVertColor: canvas.attr("data-vert-grid-color") ? canvas.attr("data-vert-grid-color") : "#e8e8e8",
+			gridHorzColor: canvas.attr("data-horz-grid-color") ? canvas.attr("data-horz-grid-color") : "#b6b6b6",
+			baselineColor: canvas.attr("data-baseline-color") ? canvas.attr("data-baseline-color") : "#b6b6b6",
 			labels: opt.find(".chart-data-label").value.split(","),
 			style: canvas.attr("data-style") ? canvas.attr("data-style").split(",") : ["line"],
 			"x-prefix": canvas.attr("data-x-prefix") ? canvas.attr("data-x-prefix") : "",
@@ -164,7 +167,7 @@
 			}
 			ctx.font = "12px Arial";
 			ctx.fillStyle = "#8c8c8c";
-			ctx.strokeStyle = "#e8e8e8";
+			ctx.strokeStyle = options.gridHorzColor;
 
 			////// Horizontal Labels
 			for(var i=0; i<options.labels.length; i++){
@@ -187,14 +190,14 @@
 				ctx.fillText(x, 8 + baseOffset + 4 + 8 + (baseWidth * i / options.labels.length) - w/2, height - baseY + 4);
 
 				x = parseInt((baseWidth * i + baseWidth / 2) / options.labels.length);
-				ctx.strokeStyle = "#e8e8e8";
+				ctx.strokeStyle = options.gridVertColor;
 				ctx.beginPath();
 					ctx.moveTo(8 + baseOffset + 4 + 8 + x, 12);
 					ctx.lineTo(8 + baseOffset + 4 + 8 + x,  height - 8 - baseY - 8);
 				ctx.closePath();
 				ctx.stroke();
 
-				ctx.strokeStyle = "#b6b6b6";
+				ctx.strokeStyle = options.gridHorzColor;
 				ctx.beginPath();
 					ctx.moveTo(8 + baseOffset + 4 + 8 + x, height - 8 - baseY - 8);
 					ctx.lineTo(8 + baseOffset + 4 + 8 + x,  height - 8 - baseY);
@@ -224,7 +227,7 @@
 			ctx.stroke();
 
 			////// Baseline
-			ctx.strokeStyle = "#b6b6b6";
+			ctx.strokeStyle = options.baselineColor;
 
 			// Horizontal Base Line
 			ctx.beginPath();
