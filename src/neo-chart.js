@@ -129,7 +129,7 @@
 			textSize = ctx.measureText(yAxis(options.max));
 			baseX = parseInt(textSize.width);
 			baseOffset = baseX;
-			baseWidth = width - parseInt(baseX);
+			baseWidth = width - parseInt(baseX) - parseInt(8 + 4 + 8 + baseX);
 
 			baseOffset += parseInt(baseWidth / options.labels.length / 2);
 			baseWidth -= baseX;
