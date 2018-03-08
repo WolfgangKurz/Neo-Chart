@@ -174,10 +174,10 @@
 				// current Index
 				if(properties.index==i){
 					ctx.fillStyle = "rgba(212,212,212,0.17)";
-					var x = parseInt((baseWidth * i - baseWidth / 2) / options.labels.length);
+					var x = (parseInt(baseWidth * i - baseWidth / 2) / options.labels.length);
 					ctx.fillRect(
 						8 + baseOffset + 4 + 8 + x, 8,
-						baseWidth / options.labels.length,
+						baseWidth / options.labels.length - 2, // grid size
 						height - 8 - baseY - 8 - 8
 					);
 
