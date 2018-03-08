@@ -25,6 +25,9 @@
 		};
 		var options = {
 			title: canvas.attr("data-title") ? canvas.attr("data-title") : "",
+			font: canvas.attr("data-font") ? canvas.attr("data-font") : "12px Arial",
+			popupFont: canvas.attr("data-popup-font") ? canvas.attr("data-popup-font") : "bold 12px Arial",
+			titleFont: canvas.attr("data-title-font") ? canvas.attr("data-title-font") : "bold 16px Arial",
 			background: canvas.attr("data-background") ? canvas.attr("data-background") : "#FFFFFF",
 			gridVertColor: canvas.attr("data-vert-grid-color") ? canvas.attr("data-vert-grid-color") : "#e8e8e8",
 			gridHorzColor: canvas.attr("data-horz-grid-color") ? canvas.attr("data-horz-grid-color") : "#b6b6b6",
@@ -121,7 +124,7 @@
 
 			//////////////////////////////////////
 
-			ctx.font = "12px Arial";
+			ctx.font = options.font;
 
 			textSize = ctx.measureText(yAxis(options.max));
 			baseX = parseInt(textSize.width);
@@ -161,11 +164,11 @@
 				height -= 20;
 
 				ctx.fillStyle = "#7c7c7c";
-				ctx.font = "bold 16px Arial";
+				ctx.font = options.titleFont;
 				textSize = ctx.measureText(options.title);
 				ctx.fillText(options.title, width/2 - textSize.width/2, 0);
 			}
-			ctx.font = "12px Arial";
+			ctx.font = options.font;
 			ctx.fillStyle = "#8c8c8c";
 			ctx.strokeStyle = options.gridHorzColor;
 
@@ -250,7 +253,7 @@
 
 			////// Process Values
 			var maxW = 0;
-			ctx.font = "bold 12px Arial";
+			ctx.font = options.popupFont;
 			for(var u=0; u<options.style.length; u++){
 				switch(options.style[u]){
 					case "line":
