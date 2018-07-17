@@ -1,7 +1,7 @@
 /*!
  * Neo-Chart.js
  * https://github.com/WolfgangKurz/Neo-Chart
- * Version: 1.0.13
+ * Version: 1.0.14
  *
  * Copyright 2016-2018 Wolfgang Kurz
  * Released under the MIT license
@@ -50,7 +50,7 @@
 		options["bar-max"] = canvas.attr("data-bar-max") ? parseInt(canvas.attr("data-bar-max")) : options.max;
 
 		for(var k=0; k<options.style.length; k++){
-			var datasets = [], nameset = [], colorset = [];
+			var datasets = [], nameset = [], colorset = [], tcolorset = [];
 			for(var i=0; ; i++){
 				var dataset = opt.find(".chart-data-" + options.style[k] + "-dataset"+i);
 				if( dataset==null ) break;
@@ -72,13 +72,17 @@
 				var colors = opt.find(".chart-data-" + options.style[k] + "-color"+i).value.split(",");
 				colorset.push(colors);
 
-				var names = opt.find(".chart-data-" + options.style[k] + "-dataname"+i).value.split(",");
-				nameset.push(names);
+				var colors = opt.find(".chart-data-" + options.style[k] + "-text-color"+i);
+				if(colors!=null) tcolorset.push(colors.value.split(","));
+
+				var names = opt.find(".chart-data-" + options.style[k] + "-dataname"+i);
+				if(names!=null) nameset.push(names.value.split(","));
 			}
 
 			options[options.style[k] + "-dataset"] = datasets;
 			options[options.style[k] + "-names"] = nameset;
 			options[options.style[k] + "-colors"] = colorset;
+			options[options.style[k] + "-text-colors"] = tcolorset.length==0 ? colorset : tcolorset;
 		}
 
 		var styleAlign = ["bar","line"];
@@ -129,10 +133,10 @@
 			textSize = ctx.measureText(yAxis(options.max));
 			baseX = parseInt(textSize.width);
 			baseOffset = baseX;
-			baseWidth = width - parseInt(baseX) - parseInt(8 + 4 + 8 + baseX);
+			baseWidth = width - 8 - 8 - 4 - parseInt(baseX) - 12;
 
 			baseOffset += parseInt(baseWidth / options.labels.length / 2);
-			baseWidth -= baseX;
+			// baseWidth -= baseX;
 
 			textSize = ctx.measureText(xAxis(options.labels[0]));
 			baseY = 12 * 1.5;
@@ -480,7 +484,7 @@
 											ctx.fillStyle = "#383838";
 											ctx.fillText(options["bar-names"][i][k], x+8, 72+popY);
 
-											ctx.fillStyle = options["bar-colors"][i][k];
+											ctx.fillStyle = options["bar-text-colors"][i][k];
 											ctx.fillText(yBarAxis(dataset[v][k]), popX + x + 8, 72 + popY);
 											popY += 16;
 										}
@@ -488,7 +492,7 @@
 										ctx.fillStyle = "#383838";
 										ctx.fillText(options["bar-names"][v], x+8, 72+popY);
 
-										ctx.fillStyle = options["bar-colors"][v][0];
+										ctx.fillStyle = options["bar-text-colors"][v][0];
 										ctx.fillText(yBarAxis(dataset[v]), popX + x + 8, 72 + popY);
 										popY += 16;
 									}

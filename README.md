@@ -41,6 +41,8 @@ You don't need any CSS files to use this library.
 | data-font                | Axis text font                   | String                      | 12px Arial            |
 | data-popup-font      | Popup text font                | String                      | bold 12px Arial     |
 | data-title-font          | Title text font                   | String                      | bold 16px Arial     |
+| data-text-color         | Axis text color                  | String, Color             | #8c8c8c              |
+| data-title-color         | Title text color                  | String, Color             | #7c7c7c              |
 
 ### Example for starters
 Please see [/example/example.html](https://github.com/WolfgangKurz/Neo-Chart/blob/master/example/example.html) page.
